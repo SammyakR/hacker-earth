@@ -11,7 +11,7 @@ bool cmp(struct container c1, struct container c2){
 }
 
 int main(){
-	int n;
+	int n,xchanges,temp_index,temp_value;
 	std::cin>>n;
 	struct container arr[n];
 	for(int i=0;i<n;i++){
@@ -19,7 +19,25 @@ int main(){
 		arr[i].index = i;
 	}
 
-	std::sort(arr, arr+n, cmp);
+	//std::sort(arr, arr+n, cmp);
+
+	for(int i =0;i<n;i++){
+		xchanges = 0;
+		for(int j=0;j<n-1-i;j++){
+			if(arr[j].value > arr[j+1].value){
+				temp_index = arr[j].index;
+				temp_value = arr[j].value;
+				arr[j].index = arr[j+1].index;
+				arr[j].value = arr[j+1].value;
+				arr[j+1].index = temp_index ;
+				arr[j+1].value = temp_value ;
+				xchanges++;
+			}
+		}
+		if(xchanges == 0){break;}
+	}
+
+
 
 	for(int i=0;i<n;i++){
 		printf("%d ",arr[i].index);
